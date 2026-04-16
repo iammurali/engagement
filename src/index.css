@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: #FCF9F2; /* Soft Sandalwood Cream */
+  --color-primary: #A31D27; /* Rich Kumkum Red */
+  --color-accent: #E88D14; /* Marigold Orange/Gold */
+  --color-soft-pink: #F3E5D8; /* Soft clay tone */
+  --color-text-dark: #3A2318; /* Deep warm umber */
+  --color-text-muted: #8B5A44; /* Terracotta muted */
+  --color-border: rgba(232, 141, 20, 0.3); /* Marigold faded border */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-dark);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-vibes {
+  font-family: 'Great Vibes', cursive;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Page frame */
+#root {
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  min-height: 100vh;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Top & bottom page border */
+.page-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border);
+  z-index: 100;
+  pointer-events: none;
+}
+.page-frame-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border);
+  z-index: 100;
+  pointer-events: none;
+}
