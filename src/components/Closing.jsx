@@ -222,7 +222,7 @@ export default function Closing() {
               style={{
                 fontSize: 'clamp(0.88rem, 2.4vw, 0.98rem)',
                 color: 'var(--color-text-muted)',
-                opacity: 0.6,
+                opacity: 0.9,
                 letterSpacing: '0.03em',
               }}
             >
