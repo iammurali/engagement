@@ -37,7 +37,7 @@ export default function Closing() {
         <Reveal delay={0}>
           <p
             className="font-inter uppercase tracking-[0.42em]"
-            style={{ fontSize: '0.57rem', color: 'var(--color-accent)', opacity: 0.7 }}
+            style={{ fontSize: '0.67rem', color: 'var(--color-accent)', opacity: 0.7 }}
           >
             Until then
           </p>
@@ -64,7 +64,7 @@ export default function Closing() {
           <p
             className="font-vibes"
             style={{
-              fontSize: 'clamp(2.6rem, 9vw, 4rem)',
+              fontSize: 'clamp(2.7rem, 9vw, 4.1rem)',
               color: 'var(--color-primary)',
               lineHeight: 1.1,
             }}
@@ -77,7 +77,7 @@ export default function Closing() {
           <p
             className="font-vibes"
             style={{
-              fontSize: 'clamp(2.6rem, 9vw, 4rem)',
+              fontSize: 'clamp(2.7rem, 9vw, 4.1rem)',
               color: 'var(--color-primary)',
               lineHeight: 1.1,
               marginTop: -4,
@@ -105,7 +105,7 @@ export default function Closing() {
           <p
             className="font-cormorant italic"
             style={{
-              fontSize: 'clamp(1rem, 3.5vw, 1.2rem)',
+              fontSize: 'clamp(1.1rem, 3.5vw, 1.3rem)',
               color: 'var(--color-text-muted)',
               opacity: 0.75,
               marginBottom: 22,
@@ -122,7 +122,7 @@ export default function Closing() {
               <p
                 className="font-cormorant"
                 style={{
-                  fontSize: 'clamp(1.05rem, 3.8vw, 1.3rem)',
+                  fontSize: 'clamp(1.15rem, 3.8vw, 1.4rem)',
                   color: 'var(--color-text-dark)',
                   fontWeight: 400,
                   lineHeight: 1.3,
@@ -132,7 +132,7 @@ export default function Closing() {
               </p>
               <p
                 className="font-inter uppercase tracking-[0.24em] mt-1"
-                style={{ fontSize: '0.5rem', color: 'var(--color-text-muted)', opacity: 0.55 }}
+                style={{ fontSize: '0.6rem', color: 'var(--color-text-muted)', opacity: 0.55 }}
               >
                 Sruthi's Family
               </p>
@@ -141,7 +141,7 @@ export default function Closing() {
             <span
               className="font-vibes"
               style={{
-                fontSize: 'clamp(1.6rem, 5vw, 2.2rem)',
+                fontSize: 'clamp(1.7rem, 5vw, 2.3rem)',
                 color: 'var(--color-accent)',
                 opacity: 0.5,
                 lineHeight: 1,
@@ -154,7 +154,7 @@ export default function Closing() {
               <p
                 className="font-cormorant"
                 style={{
-                  fontSize: 'clamp(1.05rem, 3.8vw, 1.3rem)',
+                  fontSize: 'clamp(1.15rem, 3.8vw, 1.4rem)',
                   color: 'var(--color-text-dark)',
                   fontWeight: 400,
                   lineHeight: 1.3,
@@ -164,7 +164,7 @@ export default function Closing() {
               </p>
               <p
                 className="font-inter uppercase tracking-[0.24em] mt-1"
-                style={{ fontSize: '0.5rem', color: 'var(--color-text-muted)', opacity: 0.55 }}
+                style={{ fontSize: '0.6rem', color: 'var(--color-text-muted)', opacity: 0.55 }}
               >
                 Murali's Family
               </p>
@@ -193,7 +193,7 @@ export default function Closing() {
         <Reveal delay={0.88}>
           <p
             className="font-inter uppercase tracking-[0.36em]"
-            style={{ fontSize: '0.6rem', color: 'var(--color-accent)', opacity: 0.8 }}
+            style={{ fontSize: '0.7rem', color: 'var(--color-accent)', opacity: 0.8 }}
           >
             27 · 05 · 2026
           </p>
@@ -204,13 +204,13 @@ export default function Closing() {
           <div className="flex flex-col items-center mt-8">
             <div className="flex items-center gap-2" style={{ opacity: 0.4 }}>
               <div style={{ width: 24, height: 1, background: 'var(--color-accent)' }} />
-              <span style={{ fontSize: '0.55rem', color: 'var(--color-accent)', letterSpacing: '0.1em', fontFamily: 'Inter, sans-serif', textTransform: 'uppercase' }}>also</span>
+              <span style={{ fontSize: '0.65rem', color: 'var(--color-accent)', letterSpacing: '0.1em', fontFamily: 'Inter, sans-serif', textTransform: 'uppercase' }}>also</span>
               <div style={{ width: 24, height: 1, background: 'var(--color-accent)' }} />
             </div>
             <p
               className="font-vibes mt-2"
               style={{
-                fontSize: 'clamp(1.6rem, 5.5vw, 2rem)',
+                fontSize: 'clamp(1.7rem, 5.5vw, 2.1rem)',
                 color: 'var(--color-primary)',
                 lineHeight: 1.2,
               }}
@@ -220,7 +220,7 @@ export default function Closing() {
             <p
               className="font-cormorant italic mt-1"
               style={{
-                fontSize: 'clamp(0.78rem, 2.4vw, 0.88rem)',
+                fontSize: 'clamp(0.88rem, 2.4vw, 0.98rem)',
                 color: 'var(--color-text-muted)',
                 opacity: 0.6,
                 letterSpacing: '0.03em',

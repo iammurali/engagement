@@ -8,7 +8,7 @@ const FORM_URL =
 export default function RSVP() {
   return (
     <section
-      className="relative flex flex-col items-center justify-center snap-start px-6"
+      className="relative flex flex-col items-center justify-center snap-start px-8"
       style={{ background: 'var(--color-bg)', minHeight: '100dvh' }}
     >
       {/* Decorative corner petals */}
@@ -79,7 +79,7 @@ export default function RSVP() {
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.9, ease }}
         className="flex flex-col items-center text-center w-full"
-        style={{ maxWidth: 420 }}
+        style={{ maxWidth: 420, padding: '0 12px' }}
       >
         {/* Label */}
         <p
