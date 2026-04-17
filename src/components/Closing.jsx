@@ -215,7 +215,7 @@ export default function Closing() {
                 lineHeight: 1.2,
               }}
             >
-              Tanuj Mayon
+              Tanuj Maayon
             </p>
             <p
               className="font-cormorant italic mt-1"
