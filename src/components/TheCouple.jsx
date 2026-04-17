@@ -86,10 +86,10 @@ function CenterConnector() {
       viewport={{ once: true, amount: 0.5 }}
       transition={{ duration: 1.0, delay: 0.3, ease }}
       className="flex flex-col items-center justify-center"
-      style={{ padding: '32px 24px' }}
+      style={{ padding: '12px 24px' }}
     >
       {/* Vertical line top */}
-      <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, transparent, var(--color-accent))', marginBottom: 14 }} />
+      <div style={{ width: 1, height: 24, background: 'linear-gradient(to bottom, transparent, var(--color-accent))', marginBottom: 10 }} />
       {/* Diamond */}
       <div
         style={{
@@ -101,7 +101,7 @@ function CenterConnector() {
         }}
       />
       {/* Vertical line bottom */}
-      <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--color-accent), transparent)', marginTop: 14 }} />
+      <div style={{ width: 1, height: 24, background: 'linear-gradient(to bottom, var(--color-accent), transparent)', marginTop: 10 }} />
     </motion.div>
   )
 }
