@@ -49,75 +49,190 @@ export function LotusOrnament({ className = '' }) {
   )
 }
 
-export function MandalaBg({ className = '' }) {
+// Rangoli petal path pointing upward from center (200,200).
+// Pointed at both ends, widest at midpoint — each petal is rotated via SVG transform.
+// function petalPath(innerR, outerR, halfW) {
+//   const h = outerR - innerR
+//   const base = 200 - innerR
+//   const tip  = 200 - outerR
+//   return (
+//     `M 200 ${base} ` +
+//     `C ${200 + halfW} ${base - h * 0.18} ${200 + halfW} ${tip + h * 0.18} 200 ${tip} ` +
+//     `C ${200 - halfW} ${tip + h * 0.18} ${200 - halfW} ${base - h * 0.18} 200 ${base} Z`
+//   )
+// }
+
+// function petalRing(count, innerR, outerR, halfW, colors, offsetDeg = 0) {
+//   const d = petalPath(innerR, outerR, halfW)
+//   return Array.from({ length: count }, (_, i) => (
+//     <path
+//       key={i}
+//       d={d}
+//       fill={colors[i % colors.length]}
+//       stroke="white"
+//       strokeWidth="1"
+//       strokeOpacity="0.65"
+//       transform={`rotate(${(i * 360) / count + offsetDeg} 200 200)`}
+//     />
+//   ))
+// }
+
+
+export function MandalaBg({ className = '', style = {} }) {
+  const cx = 200;
+  const cy = 200;
+
+  // Rich, authentic traditional Indian wedding colors
+  const colors = [
+    "#800000", // Deep Maroon
+    "#B22222", // Fire Brick (Rich Red)
+    "#FFD700", // Gold (for accents and warmth)
+    "#DAA520", // Goldenrod
+    "#A52A2A", // Brown
+    "#8B4513", // Saddle Brown
+  ];
+
+  const ring = (count, r1, r2, offset = 0, stroke = false) =>
+    [...Array(count)].map((_, i) => {
+      const angle = (i * 360) / count + offset;
+      const rad = (angle * Math.PI) / 180;
+      // Cycle through the wedding colors
+      const color = colors[i % colors.length];
+
+      const x1 = cx + r1 * Math.cos(rad);
+      const y1 = cy + r1 * Math.sin(rad);
+
+      const x2 = cx + r2 * Math.cos(rad);
+      const y2 = cy + r2 * Math.sin(rad);
+
+      return (
+        <line
+          key={`${r1}-${i}`}
+          x1={x1}
+          y1={y1}
+          x2={x2}
+          y2={y2}
+          stroke={stroke ? "#FFD700" : color} // Gold stroke for outlines, or wedding color
+          strokeWidth={stroke ? 1.5 : 1} // Slightly thicker gold stroke
+          opacity="0.9" // Increased opacity for richer colors
+        />
+      );
+    });
+
+  const dots = (count, radius) =>
+    [...Array(count)].map((_, i) => {
+      const angle = (i * 360) / count;
+      const rad = (angle * Math.PI) / 180;
+
+      const x = cx + radius * Math.cos(rad);
+      const y = cy + radius * Math.sin(rad);
+
+      return (
+        <circle key={i} cx={x} cy={y} r="3" fill="#FFD700"> {/* Gold dots */}
+          <animate
+            attributeName="opacity"
+            values="0.6;1;0.6" // Slightly higher base opacity
+            dur={`${3 + (i % 3)}s`} // Slower animation
+            repeatCount="indefinite"
+          />
+        </circle>
+      );
+    });
+
   return (
-    <svg
-      viewBox="0 0 400 400"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={`${className}`}
-      aria-hidden="true"
-    >
-      <circle cx="200" cy="200" r="180" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.4" />
-      <circle cx="200" cy="200" r="140" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.3" />
-      <circle cx="200" cy="200" r="100" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.3" />
-      <circle cx="200" cy="200" r="60" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.4" />
-      <circle cx="200" cy="200" r="20" stroke="currentColor" strokeWidth="0.5" strokeOpacity="0.5" />
-      {[0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 180, 202.5, 225, 247.5, 270, 292.5, 315, 337.5].map((angle) => {
-        const rad = (angle * Math.PI) / 180
-        const x1 = 200 + 20 * Math.cos(rad)
-        const y1 = 200 + 20 * Math.sin(rad)
-        const x2 = 200 + 180 * Math.cos(rad)
-        const y2 = 200 + 180 * Math.sin(rad)
-        return (
-          <line
-            key={angle}
-            x1={x1} y1={y1}
-            x2={x2} y2={y2}
-            stroke="currentColor"
-            strokeWidth="0.4"
-            strokeOpacity="0.2"
-          />
-        )
-      })}
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
-        const rad = (angle * Math.PI) / 180
-        const cx = 200 + 120 * Math.cos(rad)
-        const cy = 200 + 120 * Math.sin(rad)
-        return (
-          <g key={`petal-${angle}`}>
-            <ellipse
-              cx={cx} cy={cy}
-              rx="14" ry="22"
-              transform={`rotate(${angle + 90} ${cx} ${cy})`}
-              stroke="currentColor"
-              strokeWidth="0.5"
-              strokeOpacity="0.3"
-              fill="none"
-            />
-          </g>
-        )
-      })}
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
-        const rad = (angle * Math.PI) / 180
-        const cx = 200 + 70 * Math.cos(rad)
-        const cy = 200 + 70 * Math.sin(rad)
-        return (
-          <ellipse
-            key={`inner-petal-${angle}`}
-            cx={cx} cy={cy}
-            rx="8" ry="14"
-            transform={`rotate(${angle + 90} ${cx} ${cy})`}
-            stroke="currentColor"
-            strokeWidth="0.5"
-            strokeOpacity="0.35"
-            fill="none"
-          />
-        )
-      })}
+    <svg viewBox="0 0 400 400" className={className} style={{...style, backgroundColor: '#FFF8DC'}}> {/* Light cream background */}
+      {/* 🌀 very slow, majestic rotation */}
+      <g>
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="0 200 200"
+          to="360 200 200"
+          dur="120s" // Much slower rotation
+          repeatCount="indefinite"
+        />
+
+        {/* 🌟 OUTER STRUCTURE - Lines */}
+        {ring(32, 110, 180)}
+        {ring(32, 110, 180, 5.625, true)} {/* Gold outline */}
+
+        {/* 🌼 MID LAYER - Lines */}
+        {ring(24, 75, 130)}
+        {ring(24, 75, 130, 7.5, true)}
+
+        {/* 🌺 INNER FLOWER - Lines */}
+        {ring(16, 45, 90)}
+        {ring(16, 45, 90, 11.25, true)}
+
+        {/* ✨ dots - Increased count and more rings */}
+        {dots(32, 190)}
+        {dots(24, 150)}
+        {dots(16, 110)}
+        {dots(12, 70)}
+      </g>
+
+      {/* 🪔 prominent gold center with slow pulse */}
+      <circle cx="200" cy="200" r="18" fill="#FFD700">
+        <animate attributeName="r" values="17;19;17" dur="4s" repeatCount="indefinite" />
+      </circle>
+
+      <circle cx="200" cy="200" r="8" fill="#FFF8DC" /> {/* Cream inner circle */}
     </svg>
-  )
+  );
 }
+
+// export function MandalaBg({ className = '', style = {} }) {
+//   return (
+//     <svg
+//       viewBox="0 0 400 400"
+//       xmlns="http://www.w3.org/2000/svg"
+//       className={className}
+//       style={style}
+//       aria-hidden="true"
+//     >
+//       {/* Ring A – outermost 12 petals */}
+//       {petalRing(12, 128, 174, 22, ['#E91E8C','#FF6200','#FFD700','#FF4500','#8B00FF','#00BFA5'])}
+//       {/* Ring A′ – 12 slim petals offset 15° */}
+//       {petalRing(12, 132, 168, 10, ['#FFD700','#E91E8C','#00BFA5','#FF6200','#FF4500','#8B00FF'], 15)}
+
+//       {/* Separator: dot ring + circle at r=122 */}
+//       {dotRing(24, 122, 3.5, ['#FFD700','#FF6200','#E91E8C','#8B00FF','#00BFA5','#FF4500'])}
+//       <circle cx="200" cy="200" r="122" fill="none" stroke="white" strokeWidth="0.8" strokeOpacity="0.3" />
+
+//       {/* Ring B – 12 petals offset 15° */}
+//       {petalRing(12, 88, 126, 19, ['#FF6200','#FFD700','#E91E8C','#8B00FF','#00BFA5','#FF4500'], 15)}
+//       {/* Ring B′ – 12 slim accent petals */}
+//       {petalRing(12, 92, 120, 8, ['#8B00FF','#E91E8C','#FF6200','#00BFA5','#FFD700','#FF4500'])}
+
+//       {/* Separator at r=82 */}
+//       {dotRing(16, 82, 3, ['#E91E8C','#FFD700','#8B00FF','#FF6200','#00BFA5','#FF4500'])}
+//       <circle cx="200" cy="200" r="82" fill="none" stroke="white" strokeWidth="0.8" strokeOpacity="0.3" />
+
+//       {/* Ring C – 8 petals */}
+//       {petalRing(8, 50, 86, 18, ['#FFD700','#E91E8C','#8B00FF','#00BFA5','#FF6200','#FF4500','#FFD700','#E91E8C'])}
+//       {/* Ring C′ – 8 slim accent petals offset 22.5° */}
+//       {petalRing(8, 54, 80, 8, ['#E91E8C','#8B00FF','#FFD700','#FF6200','#00BFA5','#FF4500','#E91E8C','#8B00FF'], 22.5)}
+
+//       {/* Separator at r=44 */}
+//       {dotRing(12, 44, 2.5, ['#8B00FF','#FFD700','#E91E8C','#FF6200','#00BFA5','#FF4500'])}
+//       <circle cx="200" cy="200" r="44" fill="none" stroke="white" strokeWidth="0.8" strokeOpacity="0.3" />
+
+//       {/* Ring D – innermost 8 petals offset 22.5° */}
+//       {petalRing(8, 18, 48, 13, ['#8B00FF','#FF6200','#E91E8C','#FFD700','#00BFA5','#FF4500','#8B00FF','#FF6200'], 22.5)}
+//       {/* Ring D′ – 8 slim petals */}
+//       {petalRing(8, 22, 42, 6, ['#FFD700','#E91E8C','#FF6200','#8B00FF','#FF4500','#00BFA5','#FFD700','#E91E8C'])}
+
+//       {/* Center circles */}
+//       <circle cx="200" cy="200" r="18" fill="#E91E8C" />
+//       <circle cx="200" cy="200" r="12" fill="#FFD700" />
+//       <circle cx="200" cy="200" r="7"  fill="#FF6200" />
+//       <circle cx="200" cy="200" r="3"  fill="white"   />
+
+//       {/* Outer dot border */}
+//       {dotRing(24, 183, 4, ['#E91E8C','#FF6200','#FFD700','#FF4500','#8B00FF','#00BFA5'])}
+//     </svg>
+//   )
+// }
 
 export function FloralDivider({ className = '' }) {
   return (

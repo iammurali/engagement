@@ -45,16 +45,20 @@ export default function Hero() {
       className="relative flex flex-col items-center justify-center min-h-[100dvh] snap-start overflow-hidden px-8 md:px-16"
       style={{ background: 'var(--color-bg)' }}
     >
-      {/* Mandala background */}
+      {/* Mandala — already vibrant, curtain reveals it, then it softly fades */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 180, repeat: Infinity, ease: 'linear' }}
+        initial={{ opacity: 1, scale: 0.94 }}
+        animate={{ opacity: [1, 1, 0.18], scale: [0.94, 1.03, 1] }}
+        transition={{ duration: 4.5, delay: 2.0, times: [0, 0.35, 1], ease: 'easeInOut' }}
       >
-        <MandalaBg
-          className="w-[min(95vw,520px)] h-[min(95vw,520px)]"
-          style={{ color: 'var(--color-accent)', opacity: 0.12 }}
-        />
+        <motion.div
+          className="flex items-center justify-center"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 180, repeat: Infinity, ease: 'linear' }}
+        >
+          <MandalaBg className="w-[min(95vw,520px)] h-[min(95vw,520px)]" />
+        </motion.div>
       </motion.div>
 
       {/* Floating particles */}
@@ -99,7 +103,7 @@ export default function Hero() {
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}
           animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: 1.8, ease }}
+          transition={{ duration: 1.8, delay: 2.6, ease }}
         >
           <DiamondDivider style={{ color: 'var(--color-accent)' }} />
         </motion.div>
@@ -108,7 +112,7 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, letterSpacing: '0.4em' }}
           animate={{ opacity: 1, letterSpacing: '0.3em' }}
-          transition={{ duration: 1.5, delay: 0.8, ease }}
+          transition={{ duration: 1.5, delay: 3.0, ease }}
           className="font-inter mt-6 mb-4 text-xs uppercase tracking-[0.3em]"
           style={{ color: 'var(--color-accent)' }}
         >
@@ -119,7 +123,7 @@ export default function Hero() {
         <motion.h1
           initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 1.5, delay: 1.2, ease }}
+          transition={{ duration: 1.5, delay: 3.4, ease }}
           className="font-cormorant leading-none"
           style={{
             fontSize: 'clamp(2.8rem, 11vw, 6rem)',
@@ -133,7 +137,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 1.7, ease }}
+          transition={{ duration: 1.2, delay: 3.9, ease }}
           className="font-vibes my-1"
           style={{
             fontSize: 'clamp(2rem, 8vw, 4rem)',
@@ -147,7 +151,7 @@ export default function Hero() {
         <motion.h1
           initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-          transition={{ duration: 1.5, delay: 2.0, ease }}
+          transition={{ duration: 1.5, delay: 4.2, ease }}
           className="font-cormorant leading-none"
           style={{
             fontSize: 'clamp(2.8rem, 11vw, 6rem)',
@@ -162,28 +166,44 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 2.5, ease }}
+          transition={{ duration: 1.2, delay: 4.7, ease }}
           className="mt-7 flex flex-col items-center gap-1"
         >
           <DiamondDivider style={{ color: 'var(--color-accent)' }} />
           <p
             className="font-cormorant mt-3 italic"
             style={{
-              fontSize: 'clamp(1.05rem, 3.5vw, 1.4rem)',
+              fontSize: 'clamp(1.2rem, 3.5vw, 1.6rem)',
               color: 'var(--color-text-muted)',
-              fontWeight: 400,
+              fontWeight: 600,
             }}
           >
-            27th May 2026 &nbsp;&middot;&nbsp; Nichayathartham
+            27th May 2026 &nbsp;&middot;&nbsp; Engagement 
           </p>
         </motion.div>
       </div>
+
+      {/* ── Curtain reveal ── */}
+      <motion.div
+        className="absolute inset-y-0 left-0 pointer-events-none"
+        style={{ width: '51%', zIndex: 55, background: '#1a0d10' }}
+        initial={{ x: 0 }}
+        animate={{ x: '-100%' }}
+        transition={{ duration: 2.2, delay: 0.4, ease: [0.76, 0, 0.24, 1] }}
+      />
+      <motion.div
+        className="absolute inset-y-0 right-0 pointer-events-none"
+        style={{ width: '51%', zIndex: 55, background: '#1a0d10' }}
+        initial={{ x: 0 }}
+        animate={{ x: '100%' }}
+        transition={{ duration: 2.2, delay: 0.4, ease: [0.76, 0, 0.24, 1] }}
+      />
 
       {/* Scroll hint */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.8, duration: 0.8 }}
+        transition={{ delay: 5.5, duration: 0.8 }}
         className="absolute bottom-10 flex flex-col items-center gap-2"
         style={{ color: 'var(--color-text-muted)' }}
       >

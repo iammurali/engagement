@@ -1,98 +1,138 @@
 import { motion } from 'framer-motion'
-import { LotusOrnament, DiamondDivider } from './Ornaments'
 
 const ease = [0.22, 1, 0.36, 1]
 
 export default function TheDateSection() {
   return (
     <section
-      className="flex flex-col flex-none justify-center items-center px-8 md:px-16 min-h-[100dvh] snap-start text-center relative"
-      style={{ maxWidth: 800, margin: '0 auto' }}
+      className="relative flex flex-col items-center justify-center min-h-dvh snap-start px-8 text-center overflow-hidden"
+      style={{ background: 'var(--color-bg)' }}
     >
-      <motion.p
-        className="font-inter uppercase tracking-[0.25em] mb-4"
-        style={{ fontSize: '0.65rem', color: 'var(--color-accent)' }}
-        initial={{ opacity: 0, y: -10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease }}
-      >
-        The Auspicious Day
-      </motion.p>
-
-      {/* Main Calendar Card */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-        whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1.2, ease }}
-        className="relative w-full max-w-[360px] mx-auto p-2 rounded-xl"
+      <div
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'rgba(255, 255, 255, 0.4)',
-          border: '1px solid var(--color-border)',
-          boxShadow: '0 22px 60px rgba(163, 29, 39, 0.08)',
-          backdropFilter: 'blur(10px)'
+          background:
+            'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(212,175,55,0.07) 0%, transparent 68%)',
         }}
-      >
-        {/* Inner Card Frame */}
-        <div
-          className="relative flex flex-col items-center p-10 overflow-hidden rounded-lg"
-          style={{ border: '1px dashed var(--color-accent)', background: 'rgba(255,255,255,0.7)' }}
+      />
+
+      <div className="relative flex flex-col items-center w-full" style={{ maxWidth: 480 }}>
+
+        {/* Label */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.9, ease }}
+          className="font-inter uppercase tracking-[0.44em]"
+          style={{ fontSize: '0.57rem', color: 'var(--color-accent)', opacity: 0.7, marginBottom: 40 }}
         >
-          {/* Faded Background Number */}
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-cormorant pointer-events-none select-none z-0"
-            style={{
-              fontSize: '18rem',
-              color: 'var(--color-primary)',
-              opacity: 0.04,
-              lineHeight: 0
-            }}
+          The Auspicious Day
+        </motion.p>
+
+        {/* Month */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.9, delay: 0.1, ease }}
+          className="font-inter uppercase"
+          style={{
+            fontSize: '0.72rem',
+            letterSpacing: '0.55em',
+            color: 'var(--color-accent)',
+            marginBottom: 4,
+          }}
+        >
+          M A Y
+        </motion.p>
+
+        {/* The date — the monument */}
+        <motion.p
+          initial={{ opacity: 0, scale: 0.92 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.3, delay: 0.18, ease }}
+          className="font-cormorant"
+          style={{
+            fontSize: 'clamp(9rem, 30vw, 16rem)',
+            color: 'var(--color-primary)',
+            fontWeight: 300,
+            lineHeight: 0.82,
+            letterSpacing: '-0.03em',
+          }}
+        >
+          27
+        </motion.p>
+
+        {/* Year */}
+        <motion.p
+          initial={{ opacity: 0, y: -10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.9, delay: 0.28, ease }}
+          className="font-inter uppercase"
+          style={{
+            fontSize: '0.72rem',
+            letterSpacing: '0.45em',
+            color: 'var(--color-text-muted)',
+            opacity: 0.6,
+            marginTop: 8,
+          }}
+        >
+          2 0 2 6
+        </motion.p>
+
+        {/* Gold rule */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.1, delay: 0.42, ease }}
+          style={{
+            width: '100%',
+            maxWidth: 200,
+            height: 1,
+            background:
+              'linear-gradient(to right, transparent, var(--color-accent) 25%, var(--color-accent) 75%, transparent)',
+            margin: '28px auto',
+            transformOrigin: 'center',
+            opacity: 0.4,
+          }}
+        />
+
+        {/* Day · Time · Ceremony — single elegant line */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.9, delay: 0.55, ease }}
+          className="flex items-center gap-3"
+          style={{ color: 'var(--color-text-muted)' }}
+        >
+          <span
+            className="font-inter uppercase tracking-[0.28em]"
+            style={{ fontSize: '0.6rem', opacity: 0.65 }}
           >
-            27
-          </div>
+            Wednesday
+          </span>
+          <span style={{ opacity: 0.3, fontSize: '0.5rem' }}>◆</span>
+          <span
+            className="font-cormorant"
+            style={{ fontSize: '1rem', fontWeight: 400, opacity: 0.85 }}
+          >
+            10:30 AM
+          </span>
+          <span style={{ opacity: 0.3, fontSize: '0.5rem' }}>◆</span>
+          <span
+            className="font-inter uppercase tracking-[0.28em]"
+            style={{ fontSize: '0.6rem', color: 'var(--color-accent)', opacity: 0.8 }}
+          >
+            Muhurtham
+          </span>
+        </motion.div>
 
-          <div className="relative z-10 w-full flex flex-col items-center">
-            <LotusOrnament style={{ color: 'var(--color-accent)', width: '40px', marginBottom: '1.25rem' }} />
-
-            <p
-              className="font-inter uppercase tracking-widest mb-4"
-              style={{ fontSize: '0.60rem', color: 'var(--color-text-muted)', letterSpacing: '0.3em' }}
-            >
-              Wednesday
-            </p>
-
-            <div className="flex items-center justify-center gap-4 w-full">
-              <span className="font-cormorant" style={{ fontSize: '1.5rem', color: 'var(--color-text-dark)' }}>May</span>
-              <span className="font-cormorant" style={{ fontSize: '4.5rem', color: 'var(--color-primary)', lineHeight: 0.8 }}>27</span>
-              <span className="font-cormorant" style={{ fontSize: '1.5rem', color: 'var(--color-text-dark)' }}>2026</span>
-            </div>
-
-            <div className="w-full mt-8 mb-6 flex justify-center opacity-70">
-              <DiamondDivider style={{ color: 'var(--color-accent)' }} />
-            </div>
-
-            <h2
-              className="font-cormorant"
-              style={{
-                fontSize: 'clamp(1.4rem, 5vw, 1.8rem)',
-                color: 'var(--color-text-dark)',
-                fontWeight: 400,
-                lineHeight: 1.2,
-              }}
-            >
-              10:30 AM &ndash; 12:00 PM
-            </h2>
-
-            <p
-              className="font-inter uppercase tracking-[0.25em] mt-8"
-              style={{ fontSize: '0.55rem', color: 'var(--color-primary)', fontWeight: 600, marginBottom: '15px', marginTop: '10px' }}
-            >
-              Auspicious Muhurtham
-            </p>
-          </div>
-        </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

@@ -5,7 +5,7 @@ import InvitationNote from './components/InvitationNote'
 import TheCouple from './components/TheCouple'
 import TheDateSection from './components/TheDateSection'
 import TheVenue from './components/TheVenue'
-import Countdown from './components/Countdown'
+import RSVP from './components/RSVP'
 import Closing from './components/Closing'
 import Footer from './components/Footer'
 import MusicPrompt from './components/MusicPrompt'
@@ -50,7 +50,7 @@ export default function App() {
         <TheCouple />
         <TheDateSection />
         <TheVenue />
-        <Countdown />
+        <RSVP />
         <Closing />
         <Footer />
       </main>

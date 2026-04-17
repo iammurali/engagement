@@ -1,162 +1,220 @@
 import { motion } from 'framer-motion'
-import { useCountdown } from '../hooks/useCountdown'
 
 const ease = [0.22, 1, 0.36, 1]
 
-// 27 May 2026, 10:30 AM IST (UTC+5:30 = UTC 05:00)
-const TARGET = new Date('2026-05-27T05:00:00.000Z').getTime()
+const events = [
+  {
+    date: 'Jan 25',
+    year: '2025',
+    label: 'First Met',
+    note: 'Where the story began',
+    status: 'past',
+  },
+  {
+    date: 'May 27',
+    year: '2026',
+    label: 'Nichayathartham',
+    note: 'The promise',
+    status: 'featured',
+  },
+  {
+    date: 'Nov 28',
+    year: '2026',
+    label: 'Reception',
+    note: 'Celebrating with loved ones',
+    status: 'upcoming',
+  },
+  {
+    date: 'Nov 29',
+    year: '2026',
+    label: 'Kalyanam',
+    note: 'Forever begins',
+    status: 'upcoming',
+  },
+]
 
-function CountTile({ value, label, delay }) {
-  const display = String(value).padStart(2, '0')
+function Dot({ status, delay }) {
+  const isFeatured = status === 'featured'
+  const isPast = status === 'past'
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.75, delay, ease }}
-      className="flex flex-col items-center"
+      initial={{ opacity: 0, scale: 0 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.5, delay, ease }}
+      className="relative flex items-center justify-center shrink-0"
+      style={{ width: isFeatured ? 18 : 10, height: isFeatured ? 18 : 10 }}
     >
+      {isFeatured && (
+        <motion.div
+          animate={{ scale: [1, 1.8, 1], opacity: [0.4, 0, 0.4] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute inset-0 rounded-full"
+          style={{ background: 'var(--color-primary)' }}
+        />
+      )}
       <div
-        className="relative flex items-center justify-center rounded-sm"
+        className="rounded-full"
         style={{
-          width: 'clamp(64px, 18vw, 88px)',
-          height: 'clamp(64px, 18vw, 88px)',
-          background: 'rgba(255,255,255,0.45)',
-          border: '1px solid var(--color-border)',
-          backdropFilter: 'blur(12px)',
-          boxShadow: '0 4px 20px rgba(163,29,39,0.07), inset 0 1px 0 rgba(255,255,255,0.6)',
+          width: isFeatured ? 12 : isPast ? 8 : 7,
+          height: isFeatured ? 12 : isPast ? 8 : 7,
+          background: isFeatured
+            ? 'var(--color-primary)'
+            : isPast
+            ? 'var(--color-accent)'
+            : 'transparent',
+          border: !isFeatured && !isPast ? '1.5px solid var(--color-accent)' : 'none',
+          opacity: isPast ? 0.6 : 1,
+          flexShrink: 0,
         }}
-      >
-        <span
-          className="font-cormorant"
-          style={{
-            fontSize: 'clamp(1.8rem, 7vw, 2.6rem)',
-            color: 'var(--color-primary)',
-            fontWeight: 400,
-            lineHeight: 1,
-            letterSpacing: '-0.02em',
-          }}
-        >
-          {display}
-        </span>
-      </div>
-      <p
-        className="font-inter uppercase mt-2"
-        style={{
-          fontSize: '0.58rem',
-          color: 'var(--color-text-muted)',
-          letterSpacing: '0.18em',
-        }}
-      >
-        {label}
-      </p>
+      />
     </motion.div>
   )
 }
 
-export default function Countdown() {
-  const { days, hours, minutes, seconds, isPast } = useCountdown(TARGET)
+function EventRow({ event, index }) {
+  const isEven = index % 2 === 0
+  const isFeatured = event.status === 'featured'
+  const isPast = event.status === 'past'
+  const delay = 0.15 + index * 0.12
+
+  const DateBlock = (
+    <motion.div
+      initial={{ opacity: 0, x: isEven ? -16 : 16 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.8, delay, ease }}
+      className={`flex flex-col ${isEven ? 'items-end text-right' : 'items-start text-left'}`}
+    >
+      <span
+        className="font-cormorant"
+        style={{
+          fontSize: 'clamp(1.3rem, 4.5vw, 1.9rem)',
+          color: isFeatured ? 'var(--color-primary)' : 'var(--color-text-dark)',
+          fontWeight: 300,
+          lineHeight: 1,
+          opacity: isPast ? 0.5 : 1,
+        }}
+      >
+        {event.date}
+      </span>
+      <span
+        className="font-inter uppercase tracking-[0.28em]"
+        style={{
+          fontSize: '0.52rem',
+          color: 'var(--color-text-muted)',
+          opacity: isPast ? 0.4 : 0.55,
+          marginTop: 3,
+        }}
+      >
+        {event.year}
+      </span>
+    </motion.div>
+  )
+
+  const TextBlock = (
+    <motion.div
+      initial={{ opacity: 0, x: isEven ? 16 : -16 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.8, delay: delay + 0.05, ease }}
+      className={`flex flex-col ${isEven ? 'items-start text-left' : 'items-end text-right'}`}
+    >
+      <span
+        className="font-cormorant"
+        style={{
+          fontSize: isFeatured
+            ? 'clamp(1.15rem, 4vw, 1.45rem)'
+            : 'clamp(1rem, 3.5vw, 1.2rem)',
+          color: isFeatured ? 'var(--color-primary)' : 'var(--color-text-dark)',
+          fontWeight: isFeatured ? 500 : 400,
+          lineHeight: 1.1,
+          opacity: isPast ? 0.5 : 1,
+        }}
+      >
+        {event.label}
+      </span>
+      <span
+        className="font-cormorant"
+        style={{
+          fontSize: 'clamp(0.85rem, 2.8vw, 1rem)',
+          color: 'var(--color-text-muted)',
+          fontStyle: 'italic',
+          opacity: isPast ? 0.35 : 0.6,
+          marginTop: 2,
+        }}
+      >
+        {event.note}
+      </span>
+    </motion.div>
+  )
 
   return (
+    <div className="grid items-center" style={{ gridTemplateColumns: '1fr 32px 1fr', gap: '0 16px' }}>
+      <div className="flex justify-end">{isEven ? DateBlock : TextBlock}</div>
+      <div className="flex justify-center"><Dot status={event.status} delay={delay} /></div>
+      <div className="flex justify-start">{isEven ? TextBlock : DateBlock}</div>
+    </div>
+  )
+}
+
+export default function Countdown() {
+  return (
     <section
-      className="flex flex-col flex-none justify-center items-center px-8 md:px-16 min-h-[100dvh] snap-start text-center"
-      style={{ maxWidth: 800, margin: '0 auto' }}
+      className="relative flex flex-col items-center justify-center min-h-dvh snap-start px-8 overflow-hidden"
+      style={{ background: 'var(--color-bg)' }}
     >
-      <motion.p
-        className="font-inter uppercase tracking-[0.25em] mb-3"
-        style={{ fontSize: '0.65rem', color: 'var(--color-accent)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease }}
-      >
-        Counting Down
-      </motion.p>
-
-      <motion.h2
-        className="font-cormorant mb-10"
+      <div
+        className="absolute inset-0 pointer-events-none"
         style={{
-          fontSize: 'clamp(1.6rem, 5.5vw, 2.4rem)',
-          color: 'var(--color-text-dark)',
-          fontWeight: 300,
+          background:
+            'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 70%)',
         }}
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, delay: 0.1, ease }}
-      >
-        {isPast ? 'The celebration has begun' : 'Until the celebration begins'}
-      </motion.h2>
+      />
 
-      {!isPast && (
-        <div className="flex items-start gap-3 sm:gap-5">
-          <CountTile value={days} label="Days" delay={0.2} />
-          <motion.span
-            className="font-cormorant self-start mt-3"
+      <div className="relative w-full" style={{ maxWidth: 480 }}>
+
+        {/* Label */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.9, ease }}
+          className="font-inter uppercase tracking-[0.42em] text-center mb-12"
+          style={{ fontSize: '0.57rem', color: 'var(--color-accent)', opacity: 0.7 }}
+        >
+          Our Journey
+        </motion.p>
+
+        {/* Timeline */}
+        <div className="relative flex flex-col" style={{ gap: 0 }}>
+
+          {/* Continuous vertical line */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1.8, delay: 0.2, ease: [0.4, 0, 0.6, 1] }}
+            className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 pointer-events-none"
             style={{
-              fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
-              color: 'var(--color-accent)',
-              opacity: 0.6,
-              lineHeight: 1,
+              width: 1,
+              background:
+                'linear-gradient(to bottom, transparent, var(--color-accent) 8%, var(--color-accent) 92%, transparent)',
+              opacity: 0.25,
+              transformOrigin: 'top',
             }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.6 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            :
-          </motion.span>
-          <CountTile value={hours} label="Hours" delay={0.35} />
-          <motion.span
-            className="font-cormorant self-start mt-3"
-            style={{
-              fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
-              color: 'var(--color-accent)',
-              opacity: 0.6,
-              lineHeight: 1,
-            }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.6 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: 0.45 }}
-          >
-            :
-          </motion.span>
-          <CountTile value={minutes} label="Minutes" delay={0.5} />
-          <motion.span
-            className="font-cormorant self-start mt-3"
-            style={{
-              fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
-              color: 'var(--color-accent)',
-              opacity: 0.6,
-              lineHeight: 1,
-            }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.6 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: 0.55 }}
-          >
-            :
-          </motion.span>
-          <CountTile value={seconds} label="Seconds" delay={0.65} />
+          />
+
+          {events.map((event, i) => (
+            <div key={i} style={{ padding: '22px 0' }}>
+              <EventRow event={event} index={i} />
+            </div>
+          ))}
+
         </div>
-      )}
 
-      <motion.p
-        className="font-cormorant italic mt-10"
-        style={{
-          fontSize: 'clamp(1rem, 3.5vw, 1.3rem)',
-          color: 'var(--color-text-muted)',
-          fontWeight: 300,
-        }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, delay: 0.7, ease }}
-      >
-        27 May 2026 &nbsp;&middot;&nbsp; 10:30 AM IST
-      </motion.p>
+      </div>
     </section>
   )
 }
