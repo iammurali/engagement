@@ -50,8 +50,9 @@ export default function App() {
         <TheCouple />
         <TheDateSection />
         <TheVenue />
-        <RSVP />
+
         <Closing />
+                <RSVP />
         <Footer />
       </main>
 

@@ -73,7 +73,7 @@ export default function RSVP() {
           display: 'block',
           width: '100%',
           flex: 1,
-          minHeight: 'calc(100dvh - 200px)',
+          minHeight: 'clamp(700px, 130svh, 1200px)',
           border: 'none',
         }}
       >
