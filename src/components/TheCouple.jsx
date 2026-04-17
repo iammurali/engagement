@@ -36,7 +36,7 @@ function PersonCard({ role, name, alias, description, family, delay = 0 }) {
         <p
           className="font-vibes mt-1"
           style={{
-            fontSize: 'clamp(1.3rem, 4vw, 1.65rem)',
+            fontSize: 'clamp(2rem, 4vw, 2.4rem)',
             color: 'var(--color-primary)',
             lineHeight: 1,
           }}
@@ -143,7 +143,7 @@ export default function TheCouple() {
               name="Theanmozhi S"
               alias="Sruthi"
               description="asked all the right questions… and clearly liked the answers."
-              family="Daughter of Sekar & Chitra"
+              family="Daughter of Sekar & Chithra"
               delay={0.1}
             />
           </div>

@@ -128,7 +128,7 @@ export default function Closing() {
                   lineHeight: 1.3,
                 }}
               >
-                Sekar &amp; Chitra
+                Sekar &amp; Chithra
               </p>
               <p
                 className="font-inter uppercase tracking-[0.24em] mt-1"
@@ -197,6 +197,38 @@ export default function Closing() {
           >
             27 · 05 · 2026
           </p>
+        </Reveal>
+
+        {/* Tanuj */}
+        <Reveal delay={1.0}>
+          <div className="flex flex-col items-center mt-8">
+            <div className="flex items-center gap-2" style={{ opacity: 0.4 }}>
+              <div style={{ width: 24, height: 1, background: 'var(--color-accent)' }} />
+              <span style={{ fontSize: '0.55rem', color: 'var(--color-accent)', letterSpacing: '0.1em', fontFamily: 'Inter, sans-serif', textTransform: 'uppercase' }}>also</span>
+              <div style={{ width: 24, height: 1, background: 'var(--color-accent)' }} />
+            </div>
+            <p
+              className="font-vibes mt-2"
+              style={{
+                fontSize: 'clamp(1.6rem, 5.5vw, 2rem)',
+                color: 'var(--color-primary)',
+                lineHeight: 1.2,
+              }}
+            >
+              Tanuj Mayon
+            </p>
+            <p
+              className="font-cormorant italic mt-1"
+              style={{
+                fontSize: 'clamp(0.78rem, 2.4vw, 0.88rem)',
+                color: 'var(--color-text-muted)',
+                opacity: 0.6,
+                letterSpacing: '0.03em',
+              }}
+            >
+              Sruthi's little nephew — and he can't wait to play with you all 🐭
+            </p>
+          </div>
         </Reveal>
 
       </div>
