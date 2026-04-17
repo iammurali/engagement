@@ -128,7 +128,7 @@ export default function Closing() {
                   lineHeight: 1.3,
                 }}
               >
-                Sekar &amp; Chithra
+                Sekar &amp; Chitra
               </p>
               <p
                 className="font-inter uppercase tracking-[0.24em] mt-1"
